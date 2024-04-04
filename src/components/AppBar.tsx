@@ -1,5 +1,5 @@
 
-function App() {
+function AppBar() {
   return (
     <div>
       
@@ -7,4 +7,4 @@ function App() {
   )
 }
 
-export default App
+export default AppBar
