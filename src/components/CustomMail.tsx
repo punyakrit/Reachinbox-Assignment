@@ -13,12 +13,9 @@ import { IoLinkSharp } from "react-icons/io5";
 import { RxCross2 } from "react-icons/rx";
 import { TbSquareLetterA } from "react-icons/tb";
 
-interface CustomMailProps {
-  threadId: number;
-  onClose: () => void; // Function to close the CustomMail component
-}
 
-function CustomMail({ threadId, onClose }: CustomMailProps) {
+
+function CustomMail({ threadId, onClose }: any) {
   const [replyData, setReplyData] = useState({
     to: "",
     from: "",

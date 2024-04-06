@@ -29,7 +29,7 @@ function OneBox() {
 
   if (selectedComponent === null) {
     return (
-      <div className="h-screen w-screen bg-black pl-14">
+      <div className="h-screen w-screen dark:bg-black bg-white pl-14">
         <SideBar onMenuItemClick={handleMenuItemClick} />
         <TopBar />
         <SubView />
@@ -38,7 +38,7 @@ function OneBox() {
   }
 
   return (
-    <div className="h-screen w-screen bg-black pl-14">
+    <div className="h-screen w-screen dark:bg-black bg-white pl-14">
       <SideBar onMenuItemClick={handleMenuItemClick} />
       <TopBar />
       <div>

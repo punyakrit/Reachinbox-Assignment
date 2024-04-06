@@ -16,7 +16,7 @@ function SideBar({ onMenuItemClick }: any) {
   };
 
   return (
-    <div className="bg-[#101113] overflow-y-scroll no-scrollbar h-screen w-14 flex flex-col justify-between items-center py-6 border-r-2 border-[#343A40] left-0 top-0 fixed z-10">
+    <div className="dark:bg-[#101113] bg-white overflow-y-scroll no-scrollbar h-screen w-14 flex flex-col justify-between items-center py-6 border-r-2 dark:border-[#343A40] border-[#E0E0E0] left-0 top-0 fixed z-10">
       <div className="rounded-xl">
         <img src={logo} className="h-8 rounded-xl object-left overflow-visible" alt="Logo" />
       </div>

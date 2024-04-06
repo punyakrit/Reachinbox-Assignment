@@ -103,13 +103,13 @@ const CenterPage: React.FC<Props> = ({ selectedThread }) => {
       }
     };
     fetchMail();
-  }, [selectedThread,showDelete]);
+  }, [selectedThread, showDelete]);
 
   console.log(selectedMail);
 
   return (
     <div className="overflow-y-scroll no-scrollbar  h-full">
-      <div className="border-b-2 border-[#33383F] w-full flex justify-between px-8 py-4">
+      <div className="border-b-2 dark:border-[#33383F] border-[#E0E0E0] w-full flex justify-between px-8 py-4">
         <div>
           <div className="text-lg">Orlando</div>
           <div className="text-[#FFFFFF66] text-sm">orladom@gmail.com</div>
@@ -129,10 +129,14 @@ const CenterPage: React.FC<Props> = ({ selectedThread }) => {
       </div>
 
       <div className="py-8 mx-8 relative flex justify-center items-center">
-        <div className="h-[2px] w-full bg-[#33383F]"></div> {/* Line */}
+        <div className="h-[2px] w-full dark:bg-[#33383F] bg-[#E0E0E0]"></div>{" "}
+        {/* Line */}
         <div className="absolute inset-0 flex justify-center items-center">
           {" "}
-          <div className="bg-[#171819] px-4 py-1 text-sm "> Today</div>
+          <div className="dark:bg-[#171819] bg-[#E0E0E0]  px-4 py-1 text-sm text-black dark:text-white">
+            {" "}
+            Today
+          </div>
         </div>
       </div>
 
@@ -143,10 +147,10 @@ const CenterPage: React.FC<Props> = ({ selectedThread }) => {
       </div>
 
       <div className="py-8 mx-8 relative flex justify-center items-center">
-        <div className="h-[2px] w-full bg-[#33383F]"></div> {/* Line */}
+        <div className="h-[2px] w-full bg-[#E0E0E0] dark:bg-[#33383F]"></div> {/* Line */}
         <div className="absolute inset-0 flex justify-center items-center">
           {" "}
-          <div className="bg-[#171819] px-4 py-1 text-sm flex items-center space-x-1">
+          <div className="dark:bg-[#171819] bg-[#E0E0E0] text-black dark:text-white px-4 py-1 text-sm flex items-center space-x-1">
             {" "}
             <MdOutlineExpand className="mr-3 text-xl text-[#AEAEAE]" /> View all{" "}
             <span className="text-blue-500"> 4 </span>
@@ -155,7 +159,14 @@ const CenterPage: React.FC<Props> = ({ selectedThread }) => {
         </div>
       </div>
       {/* @ts-ignore */}
-      <div className="mx-8">{showPopUp && <CustomMail threadId={selectedThread} onClose={() => setShowPopUp(false)} />}</div>
+      <div className="mx-8">
+        {showPopUp && (
+          <CustomMail
+            threadId={selectedThread}
+            onClose={() => setShowPopUp(false)}
+          />
+        )}
+      </div>
       <div
         className="cursor-pointer flex items-center fixed bottom-0 ml-10 mb-10 bg-gradient-to-r from-[#4B63DD] to-[#0524BFFC] rounded-md px-10 py-2"
         onClick={togglePopUp}
@@ -179,16 +190,10 @@ const Mail: React.FC<MailData> = ({ fromEmail, toEmail, subject, body }) => {
         <div className="flex justify-between py-4">
           <div className="space-y-2">
             <div className="font-bold ">{subject}</div>
-            <div className="text-[#AEAEAE] text-sm">
-              from: {fromEmail} 
-            </div>
-            <div className="text-[#AEAEAE] text-sm">
-               to: {toEmail}
-            </div>
+            <div className="text-[#AEAEAE] text-sm">from: {fromEmail}</div>
+            <div className="text-[#AEAEAE] text-sm">to: {toEmail}</div>
           </div>
-          <div className="text-sm text-[#7F7F7F]">
-          20 june 2022 : 9:16AM
-          </div>
+          <div className="text-sm text-[#7F7F7F]">20 june 2022 : 9:16AM</div>
         </div>
         <div
           className="py-4 text-[#E1E0E0] w-2/3"

@@ -18,14 +18,14 @@ function SubView() {
 
       
   return (
-    <div className="text-white  flex justify-center items-center h-screen flex-col">
+    <div className="dark:text-white text-[#5B5F66]  flex justify-center items-center h-screen flex-col">
       <div>
         <img src={img}></img>
       </div>
       <div className="text-2xl my-8">
         It’s the beginning of a legendary sales pipeline
       </div>
-      <div className="text-[#9E9E9E]">
+      <div className="dark:text-[#9E9E9E] text-[#5B5F66]">
         When you have inbound E-mails you’ll see them here
       </div>
     </div>

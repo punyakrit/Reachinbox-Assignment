@@ -36,7 +36,7 @@ function MainPage() {
   
   if (loading) {
     return (
-      <div className="text-white flex h-screen w-full justify-center items-center">
+      <div className="dark:text-white text-[#5B5F66] flex h-screen w-full justify-center items-center">
         Loading ...
       </div>
     );
