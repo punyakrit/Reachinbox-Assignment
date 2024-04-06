@@ -5,6 +5,7 @@ import CenterPage from "./CenterPage";
 import RightSection from "./RightSection";
 function MainPage() {
   const [datas, setData] = useState({})
+  const [loading,setLoading] = useState(true)
   useEffect(() => {
     async function call() {
       const token = localStorage.getItem("token");
@@ -13,20 +14,27 @@ function MainPage() {
           Authorization: token,
         },
       })
-      setData(res.data)
-      console.log(datas)
+      setData(res.data.data)
+      setLoading(false)
     }
     call();
   }, []);
 
+  if(loading){
+    return<div className="flex justify-center h-screen text-white items-center">
+      Loading...
+      </div>
+  }
+
   return (
     <div className="text-white pt-16 flex w-full  h-screen">
       <div className="w-1/4 ">
-        <AllInbox/>
+        <AllInbox data={datas}/>
       </div>
       <div className="w-2/4">
         <CenterPage/>
-      </div><div className="w-1/4">
+      </div>
+      <div className="w-1/4">
         <RightSection/>
       </div>
     </div>

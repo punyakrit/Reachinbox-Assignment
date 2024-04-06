@@ -1,8 +1,14 @@
 import { CiSearch } from "react-icons/ci";
 import { FaAngleDown } from "react-icons/fa";
+import { GoDotFill } from "react-icons/go";
+import { IoIosSend } from "react-icons/io";
 import { TbReload } from "react-icons/tb";
 
-function AllInbox() {
+function AllInbox({ data }: { data: any }) {
+  if (!Array.isArray(data)) {
+    console.error("Data is not an array:", data);
+    return null; // or render a placeholder, or handle the error as needed
+  }
   return (
     <div className="border-r-2 border-[#33383F] h-full overflow-y-scroll">
       <div className="px-4 pt-4 flex justify-between">
@@ -12,7 +18,8 @@ function AllInbox() {
             <FaAngleDown className="ml-2 font-normal mt-1 cursor-pointer" />
           </div>
           <div className="">
-            25/25 <span className="text-[#7F7F7F]">Inboxes selected</span>
+            {data.length}/25{" "}
+            <span className="text-[#7F7F7F]">Inboxes selected</span>
           </div>
         </div>
         <div className="p-3 mt-3 bg-[#25262B] mr-4 rounded-xl h-min cursor-pointer">
@@ -31,7 +38,7 @@ function AllInbox() {
         <div className="flex justify-between py-4">
           <div>
             <span className="bg-[#222426] text-[#5C7CFA] px-2 py-1 rounded-3xl">
-              26
+              {data.length}
             </span>{" "}
             New Replies
           </div>
@@ -42,34 +49,50 @@ function AllInbox() {
       </div>
 
       <div>
-        <Mail />
-        <Mail />
-        <Mail />
-        <Mail />
-        <Mail />
-        <Mail />
-
+        {data.map((email: any) => (
+          <Mail
+            key={email.id}
+            fromEmail={email.fromEmail}
+            subject={email.subject}
+          />
+        ))}
       </div>
     </div>
   );
 }
 
-function Mail() {
-  return (
-    <div className="border-t-2 border-[#ffffff25] mx-8 py-4">
-      <div>
-        <div className="flex justify-between">
-          <div className="text-xl font-normal">Beata@gmail.com</div>
-          <div className="text-[#FCFCFC66] font-thin pr-3">Mar 7</div>
-        </div>
-        <div className="py-2 text-[#E1E0E0] font-normal">I've tried a lot and .</div>
-        <div className="flex">
-          <div className="bg-[#222426] px-3 py-1 rounded-2xl text-[#57E0A6] text-sm">Interested</div>
-          <div className="bg-[#222426] px-3 py-1 rounded-2xl text-[#FFFFFF] text-sm ml-2">Campaign Name</div>
+function Mail({ fromEmail, subject,  }: { fromEmail: string; subject: string }) {
+    const trimSubject = (subject: string, wordCount: number) => {
+      const words = subject.split(" ");
+      if (words.length > wordCount) {
+        return words.slice(0, wordCount).join(" ") + " ...";
+      }
+      return subject;
+    };
+  
+    return (
+      <div className="border-t-2 border-[#ffffff25] mx-8 py-4 cursor-pointer">
+        <div>
+          <div className="flex justify-between">
+            <div className="text-lg font-normal">{fromEmail}</div>
+            <div className="text-[#FCFCFC66] font-thin pr-3">Mar 7</div>
+          </div>
+          <div className="py-2 text-[#E1E0E0] font-normal">
+            {trimSubject(subject, 7)} 
+          </div>
+          <div className="flex">
+            <div className="bg-[#222426] px-3 py-1 rounded-2xl text-[#57E0A6] text-sm flex items-center">
+              <GoDotFill className="mr-1 text-lg"/>Interested
+            </div>
+            <div className=" flex items-center bg-[#222426] px-3 py-1 rounded-2xl text-[#FFFFFF] text-sm ml-2">
+              <IoIosSend className="mr-1 text-lg"/>Campaign Name
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  );
-}
+    );
+  }
+  
+  
 
 export default AllInbox;
