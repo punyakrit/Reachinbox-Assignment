@@ -35,16 +35,16 @@ function AllInbox({
             All Inbox(s){" "}
             <FaAngleDown className="ml-2 font-normal mt-1 cursor-pointer" />
           </div>
-          <div className="">
+          <div className="dark:text-white text-black font-bold">
             {data.length}/25{" "}
-            <span className="text-[#7F7F7F]">Inboxes selected</span>
+            <span className="text-[#7F7F7F] font-normal">Inboxes selected</span>
           </div>
         </div>
         <div
-          className="p-3 mt-3 bg-[#25262B] mr-4 rounded-xl h-min cursor-pointer"
+          className="p-3 mt-3 dark:bg-[#25262B] bg-white border border-gray-200 dark:border-gray-800 mr-4 rounded-xl h-min cursor-pointer"
           onClick={reloadHandler}
         >
-          <TbReload />
+          <TbReload className="text-black dark:text-white" />
         </div>
       </div>
 
@@ -52,18 +52,18 @@ function AllInbox({
         <div className="relative">
           <input
             placeholder=" Search"
-            className="w-full bg-[#23272C] rounded-md p-1 pl-8 border border-[#FFFFFF1A]"
+            className="w-full dark:bg-[#23272C] bg-[#F4F6F8] rounded-md p-1 pl-8 border dark:border-[#FFFFFF1A] border-[#DFE3E8]"
           />
           <CiSearch className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
         </div>
         <div className="flex justify-between py-4">
-          <div>
-            <span className="bg-[#222426] text-[#5C7CFA] px-2 py-1 rounded-3xl">
+          <div className="dark:text-white text-black">
+            <span className="dark:bg-[#222426] bg-[#ECECEC] text-[#5C7CFA] px-2 py-1 rounded-3xl">
               {data.length}
             </span>{" "}
             New Replies
           </div>
-          <div className="flex items-center">
+          <div className="flex items-center dark:text-white text-black ">
             Newest <FaAngleDown className="ml-3 text-xl" />
           </div>
         </div>
@@ -108,23 +108,23 @@ function Mail({
 
   return (
     <div
-      className="border-t-2 border-[#ffffff25] mx-8 py-4 cursor-pointer"
+      className="border-t-2 dark:border-[#ffffff25] border-[#8b8b8b64] mx-8 py-4 cursor-pointer"
       onClick={handleMailClick}
     >
       <div>
         <div className="flex justify-between">
-          <div className="text-lg font-normal">{fromEmail}</div>
-          <div className="text-[#FCFCFC66] font-thin pr-3">Mar 7</div>
+          <div className="dark:text-white text-black text-lg font-normal">{fromEmail}</div>
+          <div className="dark:text-[#FCFCFC66] text-[#919EAB] font-thin pr-3">Mar 7</div>
         </div>
-        <div className="py-2 text-[#E1E0E0] font-normal">
+        <div className="py-2 dark:text-[#E1E0E0] text-gray-600 font-normal">
           {trimSubject(subject, 7)}
         </div>
         <div className="flex">
-          <div className="bg-[#222426] px-3 py-1 rounded-2xl text-[#57E0A6] text-sm flex items-center">
+          <div className="dark:bg-[#222426] bg-[#F0F0F0] px-3 py-1 rounded-2xl text-[#57E0A6] text-sm flex items-center">
             <GoDotFill className="mr-1 text-lg" />
             Interested
           </div>
-          <div className=" flex items-center bg-[#222426] px-3 py-1 rounded-2xl text-[#FFFFFF] text-sm ml-2">
+          <div className=" flex items-center dark:bg-[#222426] bg-[#F0F0F0] px-3 py-1 rounded-2xl dark:text-[#FFFFFF] text-black text-sm ml-2">
             <IoIosSend className="mr-1 text-lg" />
             Campaign Name
           </div>

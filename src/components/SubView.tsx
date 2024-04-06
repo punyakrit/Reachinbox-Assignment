@@ -18,7 +18,7 @@ function SubView() {
 
       
   return (
-    <div className="dark:text-white text-[#5B5F66]  flex justify-center items-center h-screen flex-col">
+    <div className="dark:text-white text-[#5B5F66] bg-[#ECEFF3] dark:bg-black flex justify-center items-center h-screen flex-col">
       <div>
         <img src={img}></img>
       </div>

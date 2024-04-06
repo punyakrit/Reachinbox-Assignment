@@ -111,18 +111,18 @@ const CenterPage: React.FC<Props> = ({ selectedThread }) => {
     <div className="overflow-y-scroll no-scrollbar  h-full">
       <div className="border-b-2 dark:border-[#33383F] border-[#E0E0E0] w-full flex justify-between px-8 py-4">
         <div>
-          <div className="text-lg">Orlando</div>
-          <div className="text-[#FFFFFF66] text-sm">orladom@gmail.com</div>
+          <div className="dark:text-white text-black text-lg">Orlando</div>
+          <div className="dark:text-[#FFFFFF66] text-[#343A40B2] text-sm">orladom@gmail.com</div>
         </div>
         <div className="flex items-center space-x-3">
-          <div className="flex bg-[#1F1F1F] border border-[#343A40] items-center rounded-md py-2 px-3 text-sm">
+          <div className="flex dark:bg-[#1F1F1F] bg-white border dark:border-[#343A40] items-center text-black dark:text-white rounded-md py-2 px-3 text-sm">
             <GoDotFill className="text-yellow-500 text-xl" /> Meeting Completed{" "}
             <SlArrowDown className=" ml-2" />
           </div>
-          <div className="bg-[#1F1F1F] flex items-center border border-[#343A40] rounded-md py-2 px-3 text-sm">
+          <div className="dark:bg-[#1F1F1F] flex items-center text-black dark:text-white border bg-white dark:border-[#343A40] rounded-md py-2 px-3 text-sm">
             Move <SlArrowDown className=" ml-2" />
           </div>
-          <div className="bg-[#1F1F1F] border border-[#343A40] rounded-md py-2 px-3 text-sm">
+          <div className="dark:bg-[#1F1F1F] border bg-white text-black dark:text-white  dark:border-[#343A40] rounded-md py-2 px-3 text-sm">
             ...
           </div>
         </div>
@@ -185,18 +185,18 @@ const CenterPage: React.FC<Props> = ({ selectedThread }) => {
 
 const Mail: React.FC<MailData> = ({ fromEmail, toEmail, subject, body }) => {
   return (
-    <div className="bg-[#141517] border border-[#343A40] mx-8 rounded-md my-3">
+    <div className="dark:bg-[#141517] bg-white border dark:border-[#343A40] mx-8 rounded-md my-3">
       <div className="p-4">
         <div className="flex justify-between py-4">
           <div className="space-y-2">
-            <div className="font-bold ">{subject}</div>
-            <div className="text-[#AEAEAE] text-sm">from: {fromEmail}</div>
-            <div className="text-[#AEAEAE] text-sm">to: {toEmail}</div>
+            <div className="font-bold dark:text-white text-black ">{subject}</div>
+            <div className="dark:text-[#AEAEAE] text-[#637381] text-sm">from: {fromEmail}</div>
+            <div className="dark:text-[#AEAEAE] text-[#637381] text-sm">to: {toEmail}</div>
           </div>
-          <div className="text-sm text-[#7F7F7F]">20 june 2022 : 9:16AM</div>
+          <div className="text-sm dark:text-[#7F7F7F] text-[#637381]">20 june 2022 : 9:16AM</div>
         </div>
         <div
-          className="py-4 text-[#E1E0E0] w-2/3"
+          className="py-4 dark:text-[#E1E0E0] text-[#172B4D] w-2/3"
           dangerouslySetInnerHTML={{ __html: body }}
         />
       </div>

@@ -36,7 +36,7 @@ function MainPage() {
   
   if (loading) {
     return (
-      <div className="dark:text-white text-[#5B5F66] flex h-screen w-full justify-center items-center">
+      <div className="bg-[#ECEFF3] dark:bg-black dark:text-white text-[#5B5F66] flex h-screen w-full justify-center items-center">
         Loading ...
       </div>
     );
@@ -47,7 +47,7 @@ function MainPage() {
   };
 
   return (
-    <div className="text-white pt-16 flex w-full  h-screen">
+    <div className="bg-[#ECEFF3] dark:bg-black text-white pt-16 flex w-full  h-screen">
       <div className="w-1/4 ">
         <AllInbox data={datas} loadMail={loadMail} />
       </div>
