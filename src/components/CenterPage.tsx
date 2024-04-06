@@ -55,6 +55,11 @@ const CenterPage: React.FC<Props> = ({ selectedThread }) => {
         setShowDelete(!showDelete);
         console.log("Pressed D");
       }
+
+      if (event.key === "r" || event.key === "R") {
+        setShowPopUp(!showPopUp);
+        console.log("Pressed R");
+      }
     };
 
     document.addEventListener("keydown", handleKeyPress);
