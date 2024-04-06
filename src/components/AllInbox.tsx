@@ -5,19 +5,23 @@ import { GoDotFill } from "react-icons/go";
 import { IoIosSend } from "react-icons/io";
 import { TbReload } from "react-icons/tb";
 
-function AllInbox({ data,loadMail }: { data: any ; loadMail: (threadId: number) => void }) {
-
-  async function reloadHandler(){
+function AllInbox({
+  data,
+  loadMail,
+}: {
+  data: any;
+  loadMail: (threadId: number) => void;
+}) {
+  async function reloadHandler() {
     const token = localStorage.getItem("token");
     await axios.get("https://hiring.reachinbox.xyz/api/v1/onebox/reset", {
-            headers: {
-              Authorization: token,
-            },
-          });
-          
-    console.log('clicked')
-  }
+      headers: {
+        Authorization: token,
+      },
+    });
 
+    console.log("clicked");
+  }
 
   if (!Array.isArray(data)) {
     console.error("Data is not an array:", data);
@@ -36,7 +40,10 @@ function AllInbox({ data,loadMail }: { data: any ; loadMail: (threadId: number) 
             <span className="text-[#7F7F7F]">Inboxes selected</span>
           </div>
         </div>
-        <div className="p-3 mt-3 bg-[#25262B] mr-4 rounded-xl h-min cursor-pointer" onClick={reloadHandler}>
+        <div
+          className="p-3 mt-3 bg-[#25262B] mr-4 rounded-xl h-min cursor-pointer"
+          onClick={reloadHandler}
+        >
           <TbReload />
         </div>
       </div>
@@ -77,41 +84,54 @@ function AllInbox({ data,loadMail }: { data: any ; loadMail: (threadId: number) 
   );
 }
 
-function Mail({ fromEmail, subject,threadId, loadMail  }: { fromEmail: string; subject: string;threadId: number; loadMail: (threadId: number) => void } ) {
-    const trimSubject = (subject: string, wordCount: number) => {
-      const words = subject.split(" ");
-      if (words.length > wordCount) {
-        return words.slice(0, wordCount).join(" ") + " ...";
-      }
-      return subject;
-    };
-    const handleMailClick = () => {
-      loadMail(threadId);
+function Mail({
+  fromEmail,
+  subject,
+  threadId,
+  loadMail,
+}: {
+  fromEmail: string;
+  subject: string;
+  threadId: number;
+  loadMail: (threadId: number) => void;
+}) {
+  const trimSubject = (subject: string, wordCount: number) => {
+    const words = subject.split(" ");
+    if (words.length > wordCount) {
+      return words.slice(0, wordCount).join(" ") + " ...";
+    }
+    return subject;
   };
-  
-    return (
-      <div className="border-t-2 border-[#ffffff25] mx-8 py-4 cursor-pointer" onClick={handleMailClick}>
-        <div>
-          <div className="flex justify-between">
-            <div className="text-lg font-normal">{fromEmail}</div>
-            <div className="text-[#FCFCFC66] font-thin pr-3">Mar 7</div>
+  const handleMailClick = () => {
+    loadMail(threadId);
+  };
+
+  return (
+    <div
+      className="border-t-2 border-[#ffffff25] mx-8 py-4 cursor-pointer"
+      onClick={handleMailClick}
+    >
+      <div>
+        <div className="flex justify-between">
+          <div className="text-lg font-normal">{fromEmail}</div>
+          <div className="text-[#FCFCFC66] font-thin pr-3">Mar 7</div>
+        </div>
+        <div className="py-2 text-[#E1E0E0] font-normal">
+          {trimSubject(subject, 7)}
+        </div>
+        <div className="flex">
+          <div className="bg-[#222426] px-3 py-1 rounded-2xl text-[#57E0A6] text-sm flex items-center">
+            <GoDotFill className="mr-1 text-lg" />
+            Interested
           </div>
-          <div className="py-2 text-[#E1E0E0] font-normal">
-            {trimSubject(subject, 7)} 
-          </div>
-          <div className="flex">
-            <div className="bg-[#222426] px-3 py-1 rounded-2xl text-[#57E0A6] text-sm flex items-center">
-              <GoDotFill className="mr-1 text-lg"/>Interested
-            </div>
-            <div className=" flex items-center bg-[#222426] px-3 py-1 rounded-2xl text-[#FFFFFF] text-sm ml-2">
-              <IoIosSend className="mr-1 text-lg"/>Campaign Name
-            </div>
+          <div className=" flex items-center bg-[#222426] px-3 py-1 rounded-2xl text-[#FFFFFF] text-sm ml-2">
+            <IoIosSend className="mr-1 text-lg" />
+            Campaign Name
           </div>
         </div>
       </div>
-    );
-  }
-  
-  
+    </div>
+  );
+}
 
 export default AllInbox;

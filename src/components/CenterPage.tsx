@@ -5,6 +5,7 @@ import { MdOutlineExpand } from "react-icons/md";
 import { FaReply } from "react-icons/fa";
 import { SlArrowDown } from "react-icons/sl";
 import { GoDotFill } from "react-icons/go";
+import DeletePopUp from "./DeletePopUp";
 
 interface MailData {
   id: number;
@@ -23,11 +24,45 @@ interface Props {
 
 const CenterPage: React.FC<Props> = ({ selectedThread }) => {
   const [showPopUp, setShowPopUp] = useState(false);
+  const [showDelete, setShowDelete] = useState(false);
+
   const [selectedMail, setSelectedMail] = useState<MailData[]>([]);
 
   const togglePopUp = () => {
     setShowPopUp(!showPopUp);
   };
+
+  const handleDelete = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      await axios.delete(
+        `https://hiring.reachinbox.xyz/api/v1/onebox/messages/${selectedThread}`,
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+      setShowDelete(false);
+    } catch (error) {
+      console.error("Error deleting mail:", error);
+    }
+  };
+
+  useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (event.key === "d" || event.key === "D") {
+        setShowDelete(!showDelete);
+        console.log("Pressed D");
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyPress);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [event]);
 
   useEffect(() => {
     const fetchMail = async () => {
@@ -63,7 +98,7 @@ const CenterPage: React.FC<Props> = ({ selectedThread }) => {
       }
     };
     fetchMail();
-  }, [selectedThread]);
+  }, [selectedThread,showDelete]);
 
   console.log(selectedMail);
 
@@ -121,6 +156,12 @@ const CenterPage: React.FC<Props> = ({ selectedThread }) => {
       >
         <FaReply className="mr-2 text-xl" /> Reply
       </div>
+      {showDelete && (
+        <DeletePopUp
+          onCancel={() => setShowDelete(false)}
+          onDelete={handleDelete}
+        />
+      )}
     </div>
   );
 };
