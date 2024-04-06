@@ -87,11 +87,11 @@ const CenterPage: React.FC<Props> = ({ selectedThread }) => {
           {
             id: 0,
             fromName: "",
-            fromEmail: "",
+            fromEmail: "jeanne@icloud.com",
             toName: "",
-            toEmail: "",
-            subject: "Default Subject",
-            body: "Default Body",
+            toEmail: " lennon.j@mail.com",
+            subject: "New Product Launch",
+            body: "I would like to introduce you to SaaSgrow, a productized design service specifically tailored for saas startups. Our aim is to help you enhance the user experience and boost the visual appeal of your software products.y",
             sentAt: "2022-01-01T00:00:00.000Z",
           },
         ]);
@@ -166,16 +166,22 @@ const CenterPage: React.FC<Props> = ({ selectedThread }) => {
   );
 };
 
-const Mail: React.FC<MailData> = ({ fromName, subject, body, sentAt }) => {
+const Mail: React.FC<MailData> = ({ fromEmail, toEmail, subject, body }) => {
   return (
     <div className="bg-[#141517] border border-[#343A40] mx-8 rounded-md my-3">
       <div className="p-4">
         <div className="flex justify-between py-4">
           <div className="space-y-2">
-            <div className="font-bold">{subject}</div>
+            <div className="font-bold ">{subject}</div>
             <div className="text-[#AEAEAE] text-sm">
-              from: {fromName} sent at: {sentAt}
+              from: {fromEmail} 
             </div>
+            <div className="text-[#AEAEAE] text-sm">
+               to: {toEmail}
+            </div>
+          </div>
+          <div className="text-sm text-[#7F7F7F]">
+          20 june 2022 : 9:16AM
           </div>
         </div>
         <div

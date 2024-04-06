@@ -1,4 +1,4 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import AllInbox from "./AllInbox";
 import CenterPage from "./CenterPage";
@@ -8,9 +8,9 @@ function MainPage() {
   const [datas, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedThread, setSelectedThread] = useState(null);
-console.log(selectedThread)
+  console.log(selectedThread);
   useEffect(() => {
-    async function fetchData() {
+    const interval = setInterval(async () => {
       try {
         const token = localStorage.getItem("token");
         const res = await axios.get(
@@ -22,15 +22,18 @@ console.log(selectedThread)
           }
         );
         setData(res.data.data);
-        setLoading(false); 
-
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
-      } 
-    }
-    fetchData();
+      }
+    }, 2500);
+  
+    // Cleanup function to clear the interval when the component unmounts
+    return () => clearInterval(interval);
   }, []);
-
+  
+  
+  
   if (loading) {
     return (
       <div className="text-white flex h-screen w-full justify-center items-center">
@@ -49,8 +52,8 @@ console.log(selectedThread)
         <AllInbox data={datas} loadMail={loadMail} />
       </div>
       <div className="w-2/4">
-       {/* @ts-ignore */}
-                <CenterPage selectedThread={selectedThread} />
+        {/* @ts-ignore */}
+        <CenterPage selectedThread={selectedThread} />
       </div>
       <div className="w-1/4">
         <RightSection />
