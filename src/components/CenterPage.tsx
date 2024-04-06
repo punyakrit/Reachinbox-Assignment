@@ -1,9 +1,72 @@
-import { FaReply } from "react-icons/fa";
-import { GoDotFill } from "react-icons/go";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import CustomMail from "./CustomMail";
 import { MdOutlineExpand } from "react-icons/md";
+import { FaReply } from "react-icons/fa";
 import { SlArrowDown } from "react-icons/sl";
+import { GoDotFill } from "react-icons/go";
 
-function CenterPage() {
+interface MailData {
+  id: number;
+  fromName: string;
+  fromEmail: string;
+  toName: string;
+  toEmail: string;
+  subject: string;
+  body: string;
+  sentAt: string;
+}
+
+interface Props {
+  selectedThread: string;
+}
+
+const CenterPage: React.FC<Props> = ({ selectedThread }) => {
+  const [showPopUp, setShowPopUp] = useState(false);
+  const [selectedMail, setSelectedMail] = useState<MailData[]>([]);
+
+  const togglePopUp = () => {
+    setShowPopUp(!showPopUp);
+  };
+
+  useEffect(() => {
+    const fetchMail = async () => {
+      if (selectedThread) {
+        try {
+          const token = localStorage.getItem("token");
+          const res = await axios.get<MailData[]>(
+            `https://hiring.reachinbox.xyz/api/v1/onebox/messages/${selectedThread}`,
+            {
+              headers: {
+                Authorization: token,
+              },
+            }
+          );
+          // @ts-ignore
+          setSelectedMail(res.data.data);
+        } catch (error) {
+          console.error("Error fetching mail:", error);
+        }
+      } else {
+        setSelectedMail([
+          {
+            id: 0,
+            fromName: "",
+            fromEmail: "",
+            toName: "",
+            toEmail: "",
+            subject: "Default Subject",
+            body: "Default Body",
+            sentAt: "2022-01-01T00:00:00.000Z",
+          },
+        ]);
+      }
+    };
+    fetchMail();
+  }, [selectedThread]);
+
+  console.log(selectedMail);
+
   return (
     <div className="overflow-y-scroll h-full">
       <div className="border-b-2 border-[#33383F] w-full flex justify-between px-8 py-4">
@@ -19,9 +82,7 @@ function CenterPage() {
           <div className="bg-[#1F1F1F] flex items-center border border-[#343A40] rounded-md py-2 px-3 text-sm">
             Move <SlArrowDown className=" ml-2" />
           </div>
-          <div className="bg-[#1F1F1F] border border-[#343A40] rounded-md py-2 px-3 text-sm">
-            ...
-          </div>
+          <div className="bg-[#1F1F1F] border border-[#343A40] rounded-md py-2 px-3 text-sm">...</div>
         </div>
       </div>
 
@@ -33,7 +94,12 @@ function CenterPage() {
         </div>
       </div>
 
-      <Mail />
+<div>
+
+      {selectedMail.map((mail) => (
+        <Mail key={mail.id} {...mail} />
+        ))}
+        </div>
 
       <div className="py-8 mx-8 relative flex justify-center items-center">
         <div className="h-[2px] w-full bg-[#33383F]"></div> {/* Line */}
@@ -47,40 +113,36 @@ function CenterPage() {
           </div>
         </div>
       </div>
-
-      <div className="cursor-pointer flex items-center fixed bottom-0 ml-10 mb-10 bg-gradient-to-r from-[#4B63DD] to-[#0524BFFC] rounded-md px-10 py-2">
-       <FaReply className="mr-2 text-xl"/> Reply
+      <div className="mx-8">{showPopUp && <CustomMail />}</div>
+      <div
+        className="cursor-pointer flex items-center fixed bottom-0 ml-10 mb-10 bg-gradient-to-r from-[#4B63DD] to-[#0524BFFC] rounded-md px-10 py-2"
+        onClick={togglePopUp}
+      >
+        <FaReply className="mr-2 text-xl" /> Reply
       </div>
     </div>
   );
-}
-function Mail() {
+};
+
+const Mail: React.FC<MailData> = ({ fromName, subject, body, sentAt }) => {
   return (
     <div className="bg-[#141517] border border-[#343A40] mx-8 rounded-md my-3">
       <div className="p-4">
         <div className="flex justify-between py-4">
           <div className="space-y-2">
-            <div className="font-bold">New Product Launch</div>
+            <div className="font-bold">{subject}</div>
             <div className="text-[#AEAEAE] text-sm">
-              from : jeanne@icloud.com cc : lennon.j@mail.com
+              from: {fromName} sent at: {sentAt}
             </div>
-            <div className="text-[#AEAEAE] text-sm">to : lennon.j@mail.com</div>
-          </div>
-          <div>
-            <div className="text-[#AEAEAE] text-sm">20 june 2022 : 9:16AM</div>
           </div>
         </div>
-        <div className="py-4 text-[#E1E0E0] w-2/3">
-          <div>Hi FIRST_NAME,</div>
-          <div className="pt-4">
-            I would like to introduce you to SaaSgrow, a productized design
-            service specifically tailored for saas startups. Our aim is to help
-            you enhance the user experience and boost the visual appeal of your
-            software products.
-          </div>
-        </div>
+        <div
+          className="py-4 text-[#E1E0E0] w-2/3"
+          dangerouslySetInnerHTML={{ __html: body }}
+        />
       </div>
     </div>
   );
-}
+};
+
 export default CenterPage;

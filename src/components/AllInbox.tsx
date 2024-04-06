@@ -1,10 +1,24 @@
+import axios from "axios";
 import { CiSearch } from "react-icons/ci";
 import { FaAngleDown } from "react-icons/fa";
 import { GoDotFill } from "react-icons/go";
 import { IoIosSend } from "react-icons/io";
 import { TbReload } from "react-icons/tb";
 
-function AllInbox({ data }: { data: any }) {
+function AllInbox({ data,loadMail }: { data: any ; loadMail: (threadId: number) => void }) {
+
+  async function reloadHandler(){
+    const token = localStorage.getItem("token");
+    await axios.get("https://hiring.reachinbox.xyz/api/v1/onebox/reset", {
+            headers: {
+              Authorization: token,
+            },
+          });
+          
+    console.log('clicked')
+  }
+
+
   if (!Array.isArray(data)) {
     console.error("Data is not an array:", data);
     return null; // or render a placeholder, or handle the error as needed
@@ -22,7 +36,7 @@ function AllInbox({ data }: { data: any }) {
             <span className="text-[#7F7F7F]">Inboxes selected</span>
           </div>
         </div>
-        <div className="p-3 mt-3 bg-[#25262B] mr-4 rounded-xl h-min cursor-pointer">
+        <div className="p-3 mt-3 bg-[#25262B] mr-4 rounded-xl h-min cursor-pointer" onClick={reloadHandler}>
           <TbReload />
         </div>
       </div>
@@ -54,6 +68,8 @@ function AllInbox({ data }: { data: any }) {
             key={email.id}
             fromEmail={email.fromEmail}
             subject={email.subject}
+            threadId={email.threadId}
+            loadMail={loadMail}
           />
         ))}
       </div>
@@ -61,7 +77,7 @@ function AllInbox({ data }: { data: any }) {
   );
 }
 
-function Mail({ fromEmail, subject,  }: { fromEmail: string; subject: string }) {
+function Mail({ fromEmail, subject,threadId, loadMail  }: { fromEmail: string; subject: string;threadId: number; loadMail: (threadId: number) => void } ) {
     const trimSubject = (subject: string, wordCount: number) => {
       const words = subject.split(" ");
       if (words.length > wordCount) {
@@ -69,9 +85,12 @@ function Mail({ fromEmail, subject,  }: { fromEmail: string; subject: string }) 
       }
       return subject;
     };
+    const handleMailClick = () => {
+      loadMail(threadId);
+  };
   
     return (
-      <div className="border-t-2 border-[#ffffff25] mx-8 py-4 cursor-pointer">
+      <div className="border-t-2 border-[#ffffff25] mx-8 py-4 cursor-pointer" onClick={handleMailClick}>
         <div>
           <div className="flex justify-between">
             <div className="text-lg font-normal">{fromEmail}</div>
