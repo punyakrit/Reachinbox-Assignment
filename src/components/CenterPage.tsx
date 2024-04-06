@@ -154,7 +154,8 @@ const CenterPage: React.FC<Props> = ({ selectedThread }) => {
           </div>
         </div>
       </div>
-      <div className="mx-8">{showPopUp && <CustomMail />}</div>
+      {/* @ts-ignore */}
+      <div className="mx-8">{showPopUp && <CustomMail threadId={selectedThread} onClose={() => setShowPopUp(false)} />}</div>
       <div
         className="cursor-pointer flex items-center fixed bottom-0 ml-10 mb-10 bg-gradient-to-r from-[#4B63DD] to-[#0524BFFC] rounded-md px-10 py-2"
         onClick={togglePopUp}
