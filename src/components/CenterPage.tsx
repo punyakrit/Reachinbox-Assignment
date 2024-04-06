@@ -68,7 +68,7 @@ const CenterPage: React.FC<Props> = ({ selectedThread }) => {
   console.log(selectedMail);
 
   return (
-    <div className="overflow-y-scroll h-full">
+    <div className="overflow-y-scroll no-scrollbar  h-full">
       <div className="border-b-2 border-[#33383F] w-full flex justify-between px-8 py-4">
         <div>
           <div className="text-lg">Orlando</div>
@@ -82,7 +82,9 @@ const CenterPage: React.FC<Props> = ({ selectedThread }) => {
           <div className="bg-[#1F1F1F] flex items-center border border-[#343A40] rounded-md py-2 px-3 text-sm">
             Move <SlArrowDown className=" ml-2" />
           </div>
-          <div className="bg-[#1F1F1F] border border-[#343A40] rounded-md py-2 px-3 text-sm">...</div>
+          <div className="bg-[#1F1F1F] border border-[#343A40] rounded-md py-2 px-3 text-sm">
+            ...
+          </div>
         </div>
       </div>
 
@@ -94,12 +96,11 @@ const CenterPage: React.FC<Props> = ({ selectedThread }) => {
         </div>
       </div>
 
-<div>
-
-      {selectedMail.map((mail) => (
-        <Mail key={mail.id} {...mail} />
+      <div>
+        {selectedMail.map((mail) => (
+          <Mail key={mail.id} {...mail} />
         ))}
-        </div>
+      </div>
 
       <div className="py-8 mx-8 relative flex justify-center items-center">
         <div className="h-[2px] w-full bg-[#33383F]"></div> {/* Line */}

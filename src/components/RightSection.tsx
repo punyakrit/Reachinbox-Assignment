@@ -3,7 +3,7 @@ import mail from "../assets/mail.svg";
 import { IoMailOpen } from "react-icons/io5";
 function RightSection() {
   return (
-    <div className="border-l-2 border-[#33383F] h-full overflow-y-scroll px-2">
+    <div className="border-l-2 border-[#33383F] h-full overflow-y-scroll no-scrollbar px-2">
       <div className="mt-5 bg-[#23272C] rounded-lg py-2 pl-4">Lead Details</div>
       <div className="px-6 my-10 space-y-6">
         <div className="flex justify-between text-sm">

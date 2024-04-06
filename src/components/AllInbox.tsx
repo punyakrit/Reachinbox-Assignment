@@ -24,7 +24,7 @@ function AllInbox({ data,loadMail }: { data: any ; loadMail: (threadId: number) 
     return null; // or render a placeholder, or handle the error as needed
   }
   return (
-    <div className="border-r-2 border-[#33383F] h-full overflow-y-scroll">
+    <div className="border-r-2 border-[#33383F] h-full overflow-y-scroll no-scrollbar">
       <div className="px-4 pt-4 flex justify-between">
         <div className="px-4 ">
           <div className="text-2xl py-3 text-[#4285F4] font-semibold flex items-center">
